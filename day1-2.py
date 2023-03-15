@@ -124,7 +124,7 @@ navigate_wait(x = 0, y = 0, z = 0.75,speed=0.25, auto_arm=True, frame_id='body')
 start_cords= get_telemetry(frame_id='aruco_map') #запоминаем координаты взлёта
 
 
-navigate_wait(x = 0.4, y = 3, z = 0.75,yaw = 0,speed=0.25, frame_id='aruco_map') # летим к стене
+navigate_wait(x = 0.5, y = 1.5, z = 0.75,yaw = 0,speed=0.25, frame_id='aruco_map') # летим к стене
 if fl == 1:
     image_sub = rospy.Subscriber('main_camera/image_raw', Image, image_callback) # обработка изображения
 
