@@ -12,8 +12,6 @@ rospy.init_node('computer_vision_sample')
 bridge = CvBridge()
 
 
-
-
 get_telemetry = rospy.ServiceProxy('get_telemetry', srv.GetTelemetry)
 navigate = rospy.ServiceProxy('navigate', srv.Navigate)
 navigate_global = rospy.ServiceProxy('navigate_global', srv.NavigateGlobal)
@@ -45,6 +43,7 @@ def image_callback(data):
     fire = cv.inRange(hsv, (30//2, 100, 100), (46//2, 255, 255))
     contours, __ = cv.findContours(fire, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE) #находим контуры огня
     x , y = 0, 0
+    fl = False
     if len(contours)>0:
         contours.sort(key=cv.minAreaRect)
         cnt = contours[0]
@@ -83,49 +82,51 @@ def image_callback(data):
         f = True
     else:
         f = False
-    # определение 
-    c = get_telemetry(frame_id="aruco_map")
-    if a and not b:
-        print("yfxfkj")
-        teln = c
-    if b and not a:
-        print("ygol")
-        tel = c
-        dlina = max((tel.x-teln.x), (tel.y-teln.y))-0.1
-        navigate_wait(yaw = -90,frame_id="body")
+    # определение стены на изображении
+    if fl :
         c = get_telemetry(frame_id="aruco_map")
-        teln = c
-    if a and f:
-        print("typik")
-        tel = c
-        dlina = max((tel.x-teln.x), (tel.y-teln.y))-0.1
-        navigate_wait(yaw = 90,frame_id="body")
-        c = get_telemetry(frame_id="aruco_map")
-        teln = c
-    if c.x>6.5:
-        print("konez")
-    if x!=0 and y!=0:
-        if w//2-30<x<w//2+30:
-            if h//2-30<y<h//2+30:
-                print("fire" + str(c.x)+ str(c.y))
-            if h//2-30 > y:
-                print("fire" + str(c.x-0.1)+ str(c.y-0.1))
-            if h//2+30 <y:
-                print("fire" + str(c.x+0.1)+ str(c.y+0.1))
-    navigate_wait(x=0.05,y=0,z=0,frame_id="body")
+        if a and not b:# определение начала стены
+            teln = c 
+        if b and not a:# определение угла, лететь направо
+            tel = c
+            dlina = max((tel.x-teln.x), (tel.y-teln.y))-0.1
+            navigate_wait(yaw = -90,frame_id="body")
+            c = get_telemetry(frame_id="aruco_map") 
+            teln = c
+        if a and f: # определение угла, лететь налево
+            tel = c
+            dlina = max((tel.x-teln.x), (tel.y-teln.y))-0.1
+            navigate_wait(yaw = 90,frame_id="body")
+            c = get_telemetry(frame_id="aruco_map")
+            teln = c
+        if c.x>6.5: # опредедление конца зоны разведки
+            navigate_wait(x = 6.5, y = 0, frame_id = "aruco_map") 
+        if x!=0 and y!=0:# определение огня
+            if w//2-30<x<w//2+30:
+                if h//2-30<y<h//2+30:
+                    print("fire" + str(c.x)+ str(c.y))
+                if h//2-30 > y:
+                    print("fire" + str(c.x-0.1)+ str(c.y-0.1))
+                if h//2+30 <y:
+                    print("fire" + str(c.x+0.1)+ str(c.y+0.1))
+        navigate_wait(x=0.05,y=0,z=0,frame_id="body")
     
-    image_pub.publish(bridge.cv2_to_imgmsg(cv_image, 'bgr8'))
+    image_pub.publish(bridge.cv2_to_imgmsg(cv_image, 'bgr8'))# вывод изображения в топик
 
     
 
     
 
-navigate_wait(x = 0, y = 0, z = 0.75,speed=0.25, auto_arm=True, frame_id='body')
-start_cords= get_telemetry(frame_id='aruco_map')
-print(start_cords.x, start_cords.y, start_cords.z)
+navigate_wait(x = 0, y = 0, z = 0.75,speed=0.25, auto_arm=True, frame_id='body') #взлёт
+start_cords= get_telemetry(frame_id='aruco_map') #запоминаем координаты взлёта
 
-navigate_wait(x = 0.7, y = 2.7, z = 0.75,yaw = 0,speed=0.25, frame_id='aruco_map')
 
-image_sub = rospy.Subscriber('main_camera/image_raw', Image, image_callback)
+navigate_wait(x = 0.4, y = 3, z = 0.75,yaw = 0,speed=0.25, frame_id='aruco_map') # летим к стене
+if fl == 1:
+    image_sub = rospy.Subscriber('main_camera/image_raw', Image, image_callback) # обработка изображения
 
-rospy.spin()
+    rospy.spin()
+navigate_wait(x = start_cords.x, y = start_cords.y, z = start_cords.z,speed=0.25, frame_id='aruco_map') #подлёт к зоне H
+
+land() #посадка
+
