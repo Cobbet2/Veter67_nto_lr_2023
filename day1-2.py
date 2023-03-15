@@ -6,7 +6,7 @@ from cv_bridge import CvBridge
 from std_srvs.srv import Trigger
 import numpy as np
 import math
-#  
+#  инициализируем библиотеки
 
 rospy.init_node('computer_vision_sample')
 bridge = CvBridge()
@@ -22,8 +22,9 @@ set_velocity = rospy.ServiceProxy('set_velocity', srv.SetVelocity)
 set_attitude = rospy.ServiceProxy('set_attitude', srv.SetAttitude)
 set_rates = rospy.ServiceProxy('set_rates', srv.SetRates)
 land = rospy.ServiceProxy('land', Trigger)
-
+# создём объекты-прокси
 image_pub = rospy.Publisher('~debug', Image, queue_size=1)
+# создаём топик для видео
 
 def navigate_wait(x=0, y=0, z=0, yaw=float('nan'), speed=0.5, frame_id='', auto_arm=False, tolerance=0.2):
     navigate(x=x, y=y, z=z, yaw=yaw, speed=speed, frame_id=frame_id, auto_arm=auto_arm)
@@ -33,7 +34,7 @@ def navigate_wait(x=0, y=0, z=0, yaw=float('nan'), speed=0.5, frame_id='', auto_
         if math.sqrt(telem.x ** 2 + telem.y ** 2 + telem.z ** 2) < tolerance:
             break
         rospy.sleep(0.2)
-
+#функция автономного полёта
 
 def image_callback(data):
     cv_image = bridge.imgmsg_to_cv2(data, 'bgr8')  # OpenCV image
@@ -42,7 +43,7 @@ def image_callback(data):
 
     hsv = cv.cvtColor(cv_image, cv.COLOR_BGR2HSV)
     fire = cv.inRange(hsv, (30//2, 100, 100), (46//2, 255, 255))
-    contours, __ = cv.findContours(fire, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
+    contours, __ = cv.findContours(fire, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE) #находим контуры огня
     x , y = 0, 0
     if len(contours)>0:
         contours.sort(key=cv.minAreaRect)
@@ -55,7 +56,7 @@ def image_callback(data):
         box = np.int0(box)
         cv.drawContours(cv_image,[box],-1,(0,0,255),1)
 
-    wall = cv.inRange(hsv, (70//2,20,100), (97//2, 255, 255))
+    wall = cv.inRange(hsv, (70//2,20,100), (97//2, 255, 255)) # определение края стены
 
     m1 = wall[340-100:][240-80:]
     
@@ -82,7 +83,7 @@ def image_callback(data):
         f = True
     else:
         f = False
-
+    # определение 
     c = get_telemetry(frame_id="aruco_map")
     if a and not b:
         print("yfxfkj")
