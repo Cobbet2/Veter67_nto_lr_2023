@@ -11,7 +11,7 @@ import math
 rospy.init_node('computer_vision_sample')
 bridge = CvBridge()
 
-
+# Объявление прокси:
 get_telemetry = rospy.ServiceProxy('get_telemetry', srv.GetTelemetry)
 navigate = rospy.ServiceProxy('navigate', srv.Navigate)
 navigate_global = rospy.ServiceProxy('navigate_global', srv.NavigateGlobal)
@@ -20,10 +20,11 @@ set_velocity = rospy.ServiceProxy('set_velocity', srv.SetVelocity)
 set_attitude = rospy.ServiceProxy('set_attitude', srv.SetAttitude)
 set_rates = rospy.ServiceProxy('set_rates', srv.SetRates)
 land = rospy.ServiceProxy('land', Trigger)
-# создём объекты-прокси
-image_pub = rospy.Publisher('~debug', Image, queue_size=1)
-# создаём топик для видео
 
+image_pub = rospy.Publisher('~debug', Image, queue_size=1)
+# создаём топик для видео /\
+
+ #Функция для полета в точку и ожидание окончания полета:
 def navigate_wait(x=0, y=0, z=0, yaw=float('nan'), speed=0.5, frame_id='', auto_arm=False, tolerance=0.2):
     navigate(x=x, y=y, z=z, yaw=yaw, speed=speed, frame_id=frame_id, auto_arm=auto_arm)
 
@@ -32,7 +33,9 @@ def navigate_wait(x=0, y=0, z=0, yaw=float('nan'), speed=0.5, frame_id='', auto_
         if math.sqrt(telem.x ** 2 + telem.y ** 2 + telem.z ** 2) < tolerance:
             break
         rospy.sleep(0.2)
-#функция автономного полёта
+        
+        
+#функция автономного полёта:
 
 def image_callback(data):
     cv_image = bridge.imgmsg_to_cv2(data, 'bgr8')  # OpenCV image
