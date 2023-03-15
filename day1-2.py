@@ -88,9 +88,9 @@ def image_callback(data):
     # определение стены на изображении
     if fl :
         c = get_telemetry(frame_id="aruco_map")
-        if a and not b:# определение начала стены
+        if a and not b: # определение начала стены
             teln = c 
-        if b and not a:# определение угла, лететь направо
+        if b and not a: # определение угла, лететь направо
             tel = c
             dlina = max((tel.x-teln.x), (tel.y-teln.y))-0.1
             navigate_wait(yaw = -90,frame_id="body")
@@ -104,7 +104,7 @@ def image_callback(data):
             teln = c
         if c.x>6.5: # опредедление конца зоны разведки
             navigate_wait(x = 6.5, y = 0, frame_id = "aruco_map") 
-        if x!=0 and y!=0:# определение огня
+        if x!=0 and y!=0: # определение огня
             if w//2-30<x<w//2+30:
                 if h//2-30<y<h//2+30:
                     print("fire" + str(c.x)+ str(c.y))
@@ -114,7 +114,7 @@ def image_callback(data):
                     print("fire" + str(c.x+0.1)+ str(c.y+0.1))
         navigate_wait(x=0.05,y=0,z=0,frame_id="body")
     
-    image_pub.publish(bridge.cv2_to_imgmsg(cv_image, 'bgr8'))# вывод изображения в топик
+    image_pub.publish(bridge.cv2_to_imgmsg(cv_image, 'bgr8')) # вывод изображения в топик
 
     
 
@@ -123,9 +123,9 @@ def image_callback(data):
 navigate_wait(x = 0, y = 0, z = 0.75,speed=0.25, auto_arm=True, frame_id='body') #взлёт
 start_cords= get_telemetry(frame_id='aruco_map') #запоминаем координаты взлёта
 
-
+fl = False
 navigate_wait(x = 0.5, y = 1.5, z = 0.75,yaw = 0,speed=0.25, frame_id='aruco_map') # летим к стене
-if fl == 1:
+if fl:
     image_sub = rospy.Subscriber('main_camera/image_raw', Image, image_callback) # обработка изображения
 
     rospy.spin()
