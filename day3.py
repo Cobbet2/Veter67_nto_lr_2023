@@ -35,6 +35,9 @@ def navigate_wait(x=0, y=0, z=0, yaw=float('nan'), speed=0.5, frame_id='', auto_
         rospy.sleep(0.2)
 
 def image_callback(data):
+
+    global fires
+    global people
     cv_image = bridge.imgmsg_to_cv2(data, 'bgr8')  # OpenCV image
     hsv = cv.cvtColor(cv_image, cv.COLOR_BGR2HSV)
     wall = cv.inRange(hsv, (75 // 2, 20, 100), (100 // 2, 255, 255))
@@ -69,30 +72,42 @@ def image_callback(data):
 
 
     if cv.countNonZero(m1)>1000:
-        print("y")
         if fires >1500:
-            print("Fire" + str(c.x) + str(c.y-0.2))
+            fire.append([c.x,c.y])
         navigate_wait(x=c.x+0.35, y = 4, z =1.25, frame_id="aruco_map")
     else:
-        print("n")
         if fireboomcenterx>1500 and fireboomcentery>1500:
-            print("Fire"+str(c.x)+str(c.y))
+            fire.append([c.x-0.2,c.y])
             navigate_wait(x=c.x, y = c.y-0.1, z=1.25,frame_id="aruco_map")
         if headx>1500 and heady>1500:
-            print("Man"+str(c.x)+str(c.y))
+            people.append([c.x-0.2,c.y])
             navigate_wait(x=c.x, y = c.y-0.1,z=1.25, frame_id="aruco_map")
         navigate_wait(x=c.x, y = c.y-0.1,z=1.25, frame_id="aruco_map")
     if c.x>6.5:
         navigate_wait(x = 0.5,y = 3.5,z=1.25, frame_id="aruco_map")
-        
+        navigate_wait(start_cords.x, start_cords.y, start_cords.z, frame_id="aruco_map")
+        land()
     image_pub.publish(bridge.cv2_to_imgmsg(cv_image, 'bgr8'))
 
+fires = []
+people = []
 navigate_wait(x = 0, y = 0, z = 1.25,speed=0.25, auto_arm=True, frame_id='body')
 start_cords= get_telemetry(frame_id='aruco_map')
-print(start_cords.x, start_cords.y, start_cords.z)
+
 navigate_wait(x = 0.5, y = 4, z = 1.25, frame_id="aruco_map")
 navigate_wait(x = 1, y = 4, z = 1.25,yaw = 0 ,speed=0.5, frame_id='aruco_map')
 
 image_sub = rospy.Subscriber('main_camera/image_raw_throttled', Image, image_callback)
-
-rospy.spin()
+while c <=10:
+    rospy.sleep(0.1)
+    if c == 10:
+        break
+print("Fires: "+str(len(fires)))
+for x in range(len(fires)):
+    print("Fire" + str(x)+": "+ str(x[0]) +" "+ str(x[1]))
+print("Injured: " + str(len(people)))
+for x in range(len(people)):
+    print("Injured"+str(x)+": "+str(x[0]) +" "+ str(x[1]))
+for x in range(1,11):
+    print("Wall"+ str(x) + ": " + "___" + "___"
+rospy.speen()
