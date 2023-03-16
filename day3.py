@@ -107,10 +107,10 @@ navigate_wait(start_cords.x, start_cords.y, start_cords.z, frame_id="aruco_map")
 land()
 print("Fires: "+str(len(firess)))
 for x in range(len(firess)):
-    print("Fire" + str(x)+": "+ str(x[0]) +" "+ str(x[1]))
+    print("Fire " + str(x)+": "+ str(x[0]) +" "+ str(x[1]))
 print("Injured: " + str(len(people)))
 for x in range(len(people)):
-    print("Injured"+str(x)+": "+str(x[0]) +" "+ str(x[1]))
+    print("Injured "+str(x)+": "+str(x[0]) +" "+ str(x[1]))
 for x in range(1,11):
-    print("Wall"+ str(x) + ": " + "___" + "___")
+    print("Wall "+ str(x) + ": " + "___" + "___")
 rospy.speen()
