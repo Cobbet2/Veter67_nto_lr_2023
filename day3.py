@@ -94,7 +94,7 @@ people = []
 u = True
 navigate_wait(x = 0, y = 0, z = 1.25,speed=0.25, auto_arm=True, frame_id='body')
 start_cords= get_telemetry(frame_id='aruco_map')
-
+navigate_wait(x = 0.5, y = 1, z = 1.25, frame_id="aruco_map")
 navigate_wait(x = 0.5, y = 4, z = 1.25, frame_id="aruco_map")
 navigate_wait(x = 1, y = 4, z = 1.25,yaw = 0 ,speed=0.5, frame_id='aruco_map')
 
@@ -105,7 +105,7 @@ while True:
         break
 navigate_wait(start_cords.x, start_cords.y, start_cords.z, frame_id="aruco_map")
 land()
-print("Fires: "+str(len(fires)))
+print("Fires: "+str(len(firess)))
 for x in range(len(firess)):
     print("Fire" + str(x)+": "+ str(x[0]) +" "+ str(x[1]))
 print("Injured: " + str(len(people)))
