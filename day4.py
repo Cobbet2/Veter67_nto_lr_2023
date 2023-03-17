@@ -9,7 +9,7 @@ import math
 import time
 import pigpio
 # /\ инициализация библиотек
-
+# объявление 13 пина gpio:
 rospy.init_node('computer_vision_sample')
 bridge = CvBridge()
 
@@ -42,6 +42,7 @@ def navigate_wait(x=0, y=0, z=0, yaw=float('nan'), speed=0.5, frame_id='', auto_
             break
         rospy.sleep(0.2)
 
+# функция сброса детелек различных цветов:
 def sbros (e):
     global cc, ck
     if e==0:
@@ -79,7 +80,7 @@ def image_callback(data):
     
     fires = cv.countNonZero(fire[120:200,:])
 
-    fire = cv.inRange(hsv, (39 // 2, 20, 100), (53 // 2, 255, 255)) # макса огня другог типа
+    fire = cv.inRange(hsv, (39 // 2, 20, 100), (53 // 2, 255, 255)) # макса огня другогo типа
     
     contours , __ = cv.findContours(fire, cv.RETR_TREE, cv.CHAIN_APPROX_SIMPLE)
     cv.drawContours(cv_image, contours, -1, (0, 255, 255), 1)
@@ -127,7 +128,7 @@ if False:
         rospy.sleep(0.1)
         if not(u):
             break
-sbros(0)
+sbros(0)  # скидываем детальки
 sbros(0)
 sbros(0)
 sbros(0)
