@@ -22,7 +22,7 @@
 
 Шестерная большая
 
-<img src="https://github.com/Cobbet2/Veter67_nto_lr_2023/blob/main/image%20(12).png"  width="400">
+https://github.com/Cobbet2/Veter67_nto_lr_2023/blob/main/image%20(11).png
 
 Крепление диска
 
