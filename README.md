@@ -34,6 +34,22 @@
 
 Устройство в сборе на деке
 
+<img src="https://github.com/Cobbet2/Veter67_nto_lr_2023/blob/main/image%20(7).png"  width="400">
+
+Устройство сверху сбоку
+
+<img src="https://github.com/Cobbet2/Veter67_nto_lr_2023/blob/main/image%20(8).png"  width="400">
+
+Устройство сверху сбоку (другой вид)
+
+<img src="https://github.com/Cobbet2/Veter67_nto_lr_2023/blob/main/image%20(6).png"  width="400">
+
+Устройство снизу сбоку
+
+<img src="https://github.com/Cobbet2/Veter67_nto_lr_2023/blob/main/image%20(5).png"  width="400">
+
+Устройство снизу 
+
 Крепление надевается на нижнюю деку путём отгибания лапок. Барабан плотно вставляется в обух крепления;
 
 • Были сделаны 3D модели в Inventor всех частей, написана инструкция по эксплуатации;
