@@ -13,8 +13,6 @@ import pigpio
 rospy.init_node('computer_vision_sample')
 bridge = CvBridge()
 
-rospy.init_node('computer_vision_sample')
-bridge = CvBridge()
 
 pi = pigpio.pi()
 pi.set_mode(13, pigpio.OUTPUT)
