@@ -6,11 +6,23 @@ from cv_bridge import CvBridge
 from std_srvs.srv import Trigger
 import numpy as np
 import math
+import time
+import pigpio
 # /\ инициализация библиотек
 
 rospy.init_node('computer_vision_sample')
 bridge = CvBridge()
 
+rospy.init_node('computer_vision_sample')
+bridge = CvBridge()
+
+pi = pigpio.pi()
+pi.set_mode(13, pigpio.OUTPUT)
+
+cc=0
+ck=0
+
+pi.set_servo_pulsewidth(13, 1500)
 
 
 # объявление прокси:
@@ -33,6 +45,24 @@ def navigate_wait(x=0, y=0, z=0, yaw=float('nan'), speed=0.5, frame_id='', auto_
         if math.sqrt(telem.x ** 2 + telem.y ** 2 + telem.z ** 2) < tolerance:
             break
         rospy.sleep(0.2)
+
+def sbros (e):
+    global cc, ck
+    if e==0:
+        ck+=1
+        if ck != 3 and ck != 4:
+            pi.set_servo_pulsewidth(13, 1500-ck*280)
+        if ck == 4:
+            pi.set_servo_pulsewidth(13, 1500-999)
+        if ck == 3:
+            pi.set_servo_pulsewidth(13, 1500-780)
+
+
+    if e==1:
+        cc+=1
+        pi.set_servo_pulsewidth(13, cc*150+1500)
+    time.sleep(2)
+    pi.set_servo_pulsewidth(13, 1500)
 
 def image_callback(data):
     global u # глобальные переменные
@@ -94,6 +124,14 @@ people = []
 u = True
 navigate_wait(x = 0, y = 0, z = 1.25,speed=0.25, auto_arm=True, frame_id='body') # взлёт
 start_cords= get_telemetry(frame_id='aruco_map') # запоминаем координаты зоны H
+sbros(0)
+sbros(0)
+sbros(0)
+sbros(0)
+sbros(1)
+sbros(1)
+sbros(1)
+sbros(1)
 navigate_wait(x = 0.5, y = 1, z = 1.25, frame_id="aruco_map")
 navigate_wait(x = 0.5, y = 4, z = 1.25, frame_id="aruco_map") # влетаем в зону
 navigate_wait(x = 1, y = 4, z = 1.25,yaw = 0 ,speed=0.5, frame_id='aruco_map')
@@ -103,6 +141,7 @@ while True:
     rospy.sleep(0.1)
     if not(u):
         break
+navigate_wait(x = 0.5, y = 1, z = 1.25, frame_id="aruco_map")
 navigate_wait(start_cords.x, start_cords.y, start_cords.z, frame_id="aruco_map") # летим к зоне H
 land() # посадка
 print("Fires: "+str(len(firess))) # отчёт
@@ -110,7 +149,7 @@ for x in range(len(firess)):
     print("Fire " + str(x)+": "+ str(x[0]) +" "+ str(x[1]))
 print("Injured: " + str(len(people)))
 for x in range(len(people)):
-    print("Injured "+str(x)+": "+str(x[0]) +" "+ str(x[1]))
+    print("Injured "+str(x)+": "+" " +str(x[0])+ str(x[1]))
 for x in range(1,11):
     print("Wall "+ str(x) + ": " + "___" + "___")
 rospy.speen()
