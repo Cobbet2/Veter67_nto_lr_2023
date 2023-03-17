@@ -5,24 +5,28 @@
 1. Разработка устройства для сброса капсул:
 
 • Устройство сбрасывает капсулы по командам "0" или "1", отправленным в терминал. На "0" сбрасываются капсулы-кубы. На "1" сбрасываются капсулы-цилиндры. Сразу после подачи команды сервопривод поворачивается на необходимый угол, отверстие диска оказывается под необходимой капсулой, и она выпадает, после диск поварачивается в своё начальное положение и находится в нём до следующей команды. При следующем сбросе капсулы такого типа угол поворота будет увеличен на угол, занимаемый одной капсулой.
-
-<img src="https://github.com/Cobbet2/Veter67_nto_lr_2023/blob/main/image%20(2).png"  width="400">
-Барабан, после модернизации
 <img src="https://github.com/Cobbet2/Veter67_nto_lr_2023/blob/main/image%20(3).png"  width="400">
 Крепление
+<img src="https://github.com/Cobbet2/Veter67_nto_lr_2023/blob/main/image%20(2).png"  width="400">
+Барабан, после модернизации
+<img src="https://github.com/Cobbet2/Veter67_nto_lr_2023/blob/main/image%20(9).png"  width="400">
+Шестерня малая
+<img src="https://github.com/Cobbet2/Veter67_nto_lr_2023/blob/main/image%20(11).png"  width="400">
+Шестерная большая
+<img src="https://github.com/Cobbet2/Veter67_nto_lr_2023/blob/main/image%20(12).png"  width="400">
+Крепление диска
 <img src="https://github.com/Cobbet2/Veter67_nto_lr_2023/blob/main/image%20(4).png"  width="400">
 Диск
 <img src="https://github.com/Cobbet2/Veter67_nto_lr_2023/blob/main/image%20(8).png"  width="400">
 Шестерня малая
 <img src="https://github.com/Cobbet2/Veter67_nto_lr_2023/blob/main/image%20(5).png"  width="400">
 Шестреня большая
-<img src="https://github.com/Cobbet2/Veter67_nto_lr_2023/blob/main/image%20(11).png"  width="400">
 Устройство в сборе, вид снизу
 <img src="https://github.com/Cobbet2/Veter67_nto_lr_2023/blob/main/image%20(6).png"  width="400">
 Устройство в сборе, вид снизу сбоку
 <img src="https://github.com/Cobbet2/Veter67_nto_lr_2023/blob/main/image%20(7).png"  width="400">
 Устройство в сборе, вид сверху сбоку
-<img src="https://github.com/Cobbet2/Veter67_nto_lr_2023/blob/main/image%20(9).png"  width="400">
+
 
 <img src="https://github.com/Cobbet2/Veter67_nto_lr_2023/blob/main/image%20(10).png"  width="400">
 
