@@ -16,7 +16,7 @@
 Шестерня малая
 <img src="https://github.com/Cobbet2/Veter67_nto_lr_2023/blob/main/image%20(5).png"  width="400">
 Шестреня большая
-<img src="https://github.com/Cobbet2/Veter67_nto_lr_2023/blob/main/image%20(12).png"  width="400">
+<img src="https://github.com/Cobbet2/Veter67_nto_lr_2023/blob/main/image%20(11).png"  width="400">
 Устройство в сборе, вид снизу
 <img src="https://github.com/Cobbet2/Veter67_nto_lr_2023/blob/main/image%20(6).png"  width="400">
 Устройство в сборе, вид снизу сбоку
