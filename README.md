@@ -30,7 +30,7 @@
 
 Диск
 
-<img src="https://github.com/Cobbet2/Veter67_nto_lr_2023/blob/main/image%20(10).png"  width="400">
+<img src="https://github.com/Cobbet2/Veter67_nto_lr_2023/blob/main/image%20(14).png"  width="400">
 
 Устройство в сборе на деке
 
