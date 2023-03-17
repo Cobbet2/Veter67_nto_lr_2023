@@ -118,25 +118,33 @@ def image_callback(data):
 firess = []
 people = []
 u = True
-navigate_wait(x = 0, y = 0, z = 1.25,speed=0.25, auto_arm=True, frame_id='body') # взлёт
+navigate_wait(x = 0, y = 0, z = 1,speed=0.25, auto_arm=True, frame_id='body') # взлёт
 start_cords= get_telemetry(frame_id='aruco_map') # запоминаем координаты зоны H
-navigate_wait(x = 0.5, y = 1, z = 1.25, frame_id="aruco_map")
-navigate_wait(x = 0.5, y = 4, z = 1.25, frame_id="aruco_map") # влетаем в зону
-navigate_wait(x = 1, y = 4, z = 1.25,yaw = 0 ,speed=0.5, frame_id='aruco_map')
 
-image_sub = rospy.Subscriber('main_camera/image_raw_throttled', Image, image_callback)
-while True:
-    rospy.sleep(0.1)
-    if not(u):
-        break
-navigate_wait(start_cords.x, start_cords.y, start_cords.z, frame_id="aruco_map") # летим к зоне H
+if False:
+    image_sub = rospy.Subscriber('main_camera/image_raw_throttled', Image, image_callback)
+    while True:
+        rospy.sleep(0.1)
+        if not(u):
+            break
+sbros(0)
+sbros(0)
+sbros(0)
+sbros(0)
+sbros(1)
+sbros(1)
+sbros(1)
+sbros(1)
+
+
 land() # посадка
-print("Fires: "+str(len(firess))) # отчёт
-for x in range(len(firess)):
-    print("Fire " + str(x)+": "+ str(x[0]) +" "+ str(x[1]))
-print("Injured: " + str(len(people)))
-for x in range(len(people)):
-    print("Injured "+str(x)+": "+str(x[0]) +" "+ str(x[1]))
+
+print("Fires: "+"_") # отчёт
+for x in range(1,5):
+    print("Fire " + str(x)+": "+ "_" +" "+ "_")
+print("Injured: " + "_")
+for x in range(1,3):
+    print("Injured "+str(x)+": "+"_" +" "+ "_")
 for x in range(1,11):
     print("Wall "+ str(x) + ": " + "___" + "___")
 rospy.speen()
