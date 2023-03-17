@@ -134,3 +134,13 @@
 2) Финальные отладки работы технического устройства.
 
 3)Устранение неполадок с квадрокоптером.
+
+Фото команды:
+
+<img src="https://github.com/Cobbet2/Veter67_nto_lr_2023/blob/main/photo_5233317307311309764_y.jpg"  width="400">
+
+<img src="https://github.com/Cobbet2/Veter67_nto_lr_2023/blob/main/photo_5233317307311309768_y.jpg"  width="400">
+
+<img src="https://github.com/Cobbet2/Veter67_nto_lr_2023/blob/main/photo_5231450551315712401_y.jpg"  width="400">
+
+<img src="https://github.com/Cobbet2/Veter67_nto_lr_2023/blob/main/photo_5231450551315712400_y.jpg"  width="400">
