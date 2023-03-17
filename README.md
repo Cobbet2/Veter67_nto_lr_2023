@@ -36,19 +36,19 @@
 
 <img src="https://github.com/Cobbet2/Veter67_nto_lr_2023/blob/main/image%20(7).png"  width="400">
 
-Устройство сверху сбоку
+Устройство сверху сбоку в сборе
 
 <img src="https://github.com/Cobbet2/Veter67_nto_lr_2023/blob/main/image%20(8).png"  width="400">
 
-Устройство сверху сбоку (другой вид)
+Устройство сверху сбоку (другой вид) в сборе
 
 <img src="https://github.com/Cobbet2/Veter67_nto_lr_2023/blob/main/image%20(6).png"  width="400">
 
-Устройство снизу сбоку
+Устройство снизу сбоку в сборе
 
 <img src="https://github.com/Cobbet2/Veter67_nto_lr_2023/blob/main/image%20(5).png"  width="400">
 
-Устройство снизу 
+Устройство снизу в сборе
 
 Крепление надевается на нижнюю деку путём отгибания лапок. Барабан плотно вставляется в обух крепления;
 
