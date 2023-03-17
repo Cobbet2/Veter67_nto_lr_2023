@@ -6,12 +6,20 @@ from cv_bridge import CvBridge
 from std_srvs.srv import Trigger
 import numpy as np
 import math
+import time
+import pigpio
 # /\ инициализация библиотек
 
 rospy.init_node('computer_vision_sample')
 bridge = CvBridge()
 
+pi = pigpio.pi()
+pi.set_mode(13, pigpio.OUTPUT)
 
+cc=0
+ck=0
+
+pi.set_servo_pulsewidth(13, 1500)
 
 # объявление прокси:
 get_telemetry = rospy.ServiceProxy('get_telemetry', srv.GetTelemetry)
@@ -34,6 +42,22 @@ def navigate_wait(x=0, y=0, z=0, yaw=float('nan'), speed=0.5, frame_id='', auto_
             break
         rospy.sleep(0.2)
 
+def sbros (e):
+    global cc, ck
+    if e==0:
+        ck+=1
+        if ck != 4:
+            pi.set_servo_pulsewidth(13, 1500-ck*280)
+        if ck == 4:
+            pi.set_servo_pulsewidth(13, 1500-880)
+
+    if e==1:
+        cc+=1
+        pi.set_servo_pulsewidth(13, cc*150+1500)
+    time.sleep(2)
+    pi.set_servo_pulsewidth(13, 1500)
+
+        
 def image_callback(data):
     global u # глобальные переменные
     global firess
@@ -74,6 +98,8 @@ def image_callback(data):
     if cv.countNonZero(m1)>1000: # если стена близко
         if fires >1500: # Если огонь у стены
             firess.append([c.x,c.y-0.2])
+            
+            sbros(e)
         navigate_wait(x=c.x+0.35, y = 4, z =1.25, frame_id="aruco_map") # перелетаем на начало следующего прохода
     else:
         if fireboomcenterx>1500 and fireboomcentery>1500: # если огонь на полу
