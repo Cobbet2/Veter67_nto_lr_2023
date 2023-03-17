@@ -47,4 +47,4 @@ while 1==1:
   3)	Устранение неполадок с квадрокоптером.
 
 ![Alt text](https://github.com/Cobbet2/Veter67_nto_lr_2023/blob/main/image1.png "a title")
-![Alt text](https://github.com/Cobbet2/Veter67_nto_lr_2023/blob/main/video5233317306855073081.mp4 "a title")
+![Alt text]https://github.com/Cobbet2/Veter67_nto_lr_2023/blob/main/video1.mp4 "a title")
