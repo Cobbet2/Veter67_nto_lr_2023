@@ -30,17 +30,6 @@
 
 Диск
 
-<img src="https://github.com/Cobbet2/Veter67_nto_lr_2023/blob/main/image%20(8).png"  width="400">
-Шестерня малая
-<img src="https://github.com/Cobbet2/Veter67_nto_lr_2023/blob/main/image%20(5).png"  width="400">
-Шестреня большая
-Устройство в сборе, вид снизу
-<img src="https://github.com/Cobbet2/Veter67_nto_lr_2023/blob/main/image%20(6).png"  width="400">
-Устройство в сборе, вид снизу сбоку
-<img src="https://github.com/Cobbet2/Veter67_nto_lr_2023/blob/main/image%20(7).png"  width="400">
-Устройство в сборе, вид сверху сбоку
-
-
 <img src="https://github.com/Cobbet2/Veter67_nto_lr_2023/blob/main/image%20(10).png"  width="400">
 
 Крепление надевается на нижнюю деку путём отгибания лапок. Барабан плотно вставляется в обух крепления;
